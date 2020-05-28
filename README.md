@@ -14,5 +14,7 @@ manifestation of pneumonia [condition] can be seen on imaging [procedure].
 
 This is just an approach that we can use for the purpose of extracting information from medical data.
 
-training.json and training2.json are the inputs to the model. application.py and index.html contain the necessary code to build a User
-Interface to display a basic Input-Output form.
+
+Medical-Ner-spaCy is the python file which has the code for training the NER model using spaCy.
+training.json and training2.json are the inputs to the model. 
+application.py and index.html contain the necessary code to build a User Interface to display a basic Input-Output form.
