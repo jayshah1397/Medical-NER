@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+        //console.log("in script");
+        function viewJSON() {
+            //console.log("In viewJSON");
+            var URL = "/result";
+            function loadJSON(url) {
+                //console.log("In loadJSON");
+                var sentence=document.forms['myform'].elements['text_value'].value;
+                var data=new FormData();
+                data.append("mysentence",sentence);
+
+                var xmlhttp=new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                       // Typical action to be performed when the document is ready:
+                        jsonObj= JSON.parse(xmlhttp.responseText);
+                        jsonObj.onload=generateHTML(jsonObj);
+
+                    }
+                };
+                    xmlhttp.open("POST",url,true);
+                    xmlhttp.send(data);
+                }
+            loadJSON(URL);
+        }
+
+        function generateHTML(jsonObj) {
+        	var stringres="<p>Output Annotations:</p>";
+        	console.log(jsonObj.length);
+        	for(i=0;i<jsonObj.length;i++)
+        	{
+
+        		stringres+="<p>"+jsonObj[i]+"</p>";
+        	}
+            document.getElementById("result_div").innerHTML=stringres;
+
+            }
+
+</script>
+<body style="justify-content: center;text-align: center; float: center;">
+
+<h2>Named Entity Recognition Jay Shah</h2>
+
+<form name="myform" id="myform" onsubmit="return false">
+  <label for="fname">Input Text:</label><br>
+  <input type="text" id="fname" name="text_value" style="width: 70%;margin-top: 10px;margin-bottom: 10px;  "><br>
+  
+  <input type="submit" value="Submit" onclick="viewJSON()">
+</form> 
+<div id="result_div"></div>
+
+</body>
+</html>
